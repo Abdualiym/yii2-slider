@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m191004_071721_create_slider_categories_table extends Migration
+class m191004_071826_create_slider_categories_table extends Migration
 {
     /**
      * {@inheritdoc}

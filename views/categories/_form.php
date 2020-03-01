@@ -16,34 +16,28 @@ use yii\widgets\ActiveForm;
     <?= $form->errorSummary($model) ?>
 
     <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'common')->checkbox() ?>
+    <?= $form->field($model, 'common_image')->checkbox() ?>
+    <?= $form->field($model, 'common_link')->checkbox() ?>
+    <?= $form->field($model, 'common_text')->checkbox() ?>
     <?= $form->field($model, 'use_tags')->checkbox() ?>
 
     <div class="box">
         <div class="box-body">
-            <ul class="nav nav-tabs" role="tablist">
-                <?php foreach (Yii::$app->params['slider']['languages2'] as $key => $language) : ?>
-                    <li role="presentation" <?= $key == 0 ? 'class="active"' : '' ?>>
-                        <a href="#<?= $key ?>" aria-controls="<?= $key ?>" role="tab" data-toggle="tab"><?= $language ?></a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-            <div class="tab-content">
-                <br>
-                <?php foreach (Yii::$app->params['slider']['languages2'] as $key => $language) : ?>
-                    <div role="tabpanel" class="tab-pane <?= $key == 0 ? 'active' : '' ?>" id="<?= $key ?>">
-                        <?= $form->field($model, 'title_' . $key)->textInput(['maxlength' => true]) ?>
-                        <?= $form->field($model, 'description_' . $key)->textarea() ?>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+            <?php foreach (Yii::$app->params['slider']['languages2'] as $key => $language) : ?>
+                <div class="col-sm-3">
+                    <p><?= $language ?></p>
+                    <?= $form->field($model, 'title_' . $key)->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'description_' . $key)->textarea() ?>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
+</div>
 
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('slider', 'Save'), ['class' => 'btn btn-success']) ?>
-    </div>
+<div class="form-group">
+    <?= Html::submitButton(Yii::t('slider', 'Save'), ['class' => 'btn btn-success']) ?>
+</div>
 
-    <?php ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
 
 </div>

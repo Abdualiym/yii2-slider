@@ -1,6 +1,5 @@
 <?php
 
-use abdualiym\slider\entities\Slides;
 use abdualiym\slider\forms\SlidesSearch;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -9,41 +8,39 @@ use yii\helpers\Html;
 /* @var $searchModel SlidesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('slider', 'Slides');
+$slug = Yii::$app->request->get('slug');
+$category = \abdualiym\slider\entities\Categories::findOne(['slug' => $slug]);
+$this->title = $category->title_0;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="articles-index">
 
     <p>
-        <?= Html::a(Yii::t('slider', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('slider', 'Create'), ['create', 'slug' => $slug], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
             [
-                'attribute' => 'photo',
+                'attribute' => 'id',
+                'value' => function ($model) use ($category) {
+                    return Html::a('<i class="glyphicon glyphicon-eye"></i>', ['view', 'id' => $model->id, 'slug' => $category->slug]);
+                },
+                'label' => ''
+            ],
+            'sort',
+            [
+                'attribute' => 'photo_0',
                 'value' => function ($model) {
-                    return Html::img($model->getThumbFileUrl('photo', 'sm'));
+                    return Html::img($model->getThumbFileUrl('photo_0', 'sm'));
                 },
                 'format' => 'raw'
             ],
+            'link_0:url',
             'title_0',
-            [
-                'attribute' => 'category_id',
-                'filter' => $searchModel->categoriesList(),
-                'value' => function (Slides $model) {
-                    return Html::a(Html::encode($model->category->title_0), ['/cms/article-categories/view', 'id' => $model->category_id]);
-                },
-                'format' => 'raw',
-            ],
-            'slug',
-            'date:datetime',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            'active:boolean',
         ],
     ]); ?>
 </div>

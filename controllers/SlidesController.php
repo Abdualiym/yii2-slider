@@ -2,6 +2,7 @@
 
 namespace abdualiym\slider\controllers;
 
+use abdualiym\slider\entities\Categories;
 use abdualiym\slider\entities\Slides;
 use abdualiym\slider\forms\SlidesSearch;
 use Yii;
@@ -27,14 +28,15 @@ class SlidesController extends Controller
      * Lists all Slides models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($slug)
     {
         $searchModel = new SlidesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $slug);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'category' => Categories::findOne(['slug' => $slug])
         ]);
     }
 
@@ -44,10 +46,11 @@ class SlidesController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($id, $slug)
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'category' => Categories::findOne(['slug' => $slug])
         ]);
     }
 
@@ -72,16 +75,17 @@ class SlidesController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($slug)
     {
         $model = new Slides();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id, 'slug' => $slug]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'category' => Categories::findOne(['slug' => $slug])
         ]);
     }
 
@@ -92,16 +96,17 @@ class SlidesController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id, $slug)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id, 'slug' => $slug]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'category' => Categories::findOne(['slug' => $slug])
         ]);
     }
 

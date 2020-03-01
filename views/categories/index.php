@@ -25,8 +25,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'title_0',
             'slug',
-            'common:boolean',
             'use_tags:boolean',
+            'common_image:boolean',
+            'common_link:boolean',
+            'common_text:boolean',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

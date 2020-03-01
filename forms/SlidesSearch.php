@@ -2,6 +2,7 @@
 
 namespace abdualiym\slider\forms;
 
+use abdualiym\slider\entities\Categories;
 use abdualiym\slider\entities\Slides;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -12,8 +13,7 @@ class SlidesSearch extends Slides
     public function rules()
     {
         return [
-            [['id', 'date', 'status', 'category_id'], 'integer'],
-            [['title_0'], 'safe'],
+            [['active'], 'integer'],
         ];
     }
 
@@ -31,17 +31,16 @@ class SlidesSearch extends Slides
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $slug)
     {
-        $query = Slides::find();
-
-        // add conditions that should always apply here
+        $category = Categories::findOne(['slug' => $slug]);
+        $query = Slides::find()->where(['category_id' => $category->id]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
                 'defaultOrder' => [
-                    'id' => SORT_DESC
+                    'sort' => SORT_DESC
                 ]
             ],
         ]);
@@ -55,14 +54,7 @@ class SlidesSearch extends Slides
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'date' => $this->date,
-            'status' => $this->status,
-            'category_id' => $this->category_id,
-        ]);
-
-        $query->andFilterWhere(['like', 'title_0', $this->title_0]);
+        $query->andFilterWhere(['active' => $this->active]);
 
         return $dataProvider;
     }

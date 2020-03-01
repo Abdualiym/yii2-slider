@@ -1,4 +1,4 @@
-# yii2-block extension
+# yii2-slider extension
 
 The extension allows manage html content block.
 
@@ -7,24 +7,25 @@ The extension allows manage html content block.
 - Install with composer:
 
 ```bash
-composer require abdualiym/yii2-cms "^1.0"
+composer require abdualiym/yii2-slider "^1.0"
 ```
 
 - **After composer install** run console command for create tables:
 
 ```bash
-php yii migrate/up --migrationPath=@vendor/abdualiym/yii2-cms/migrations
+php yii migrate/up --migrationPath=@vendor/abdualiym/yii2-slider/migrations
 ```
 
 - Setup in common config storage and language configurations.
 > language indexes related with database columns.
 
-> Admin panel tabs render by array values order 
+> Admin panel tabs render by array values order. 
 
+> Begin id param value from 0.
 ```php
 'modules' => [
-    'cms' => [ // don`t change module key
-        'class' => '@abdualiym\cms\Module',
+    'slider' => [ // don`t change module key
+        'class' => '@abdualiym\slider\Module',
         'storageRoot' => $params['staticPath'],
         'storageHost' => $params['staticHostInfo'],
         'thumbs' => [ // 'sm' and 'md' keys are reserved
@@ -41,23 +42,16 @@ php yii migrate/up --migrationPath=@vendor/abdualiym/yii2-cms/migrations
                 'name' => 'O`zbek tili',
             ],
         ],
-        'menuActions' => [ // for add to menu controller actions
-            '' => 'Home',
-            'site/contacts' => 'Contacts',
-        ]
     ],
-],
+]
 ```
 
 - In admin panel add belove links for manage pages, article categories, articles and menu:
 ```php
-/cms/pages/index
-/cms/article-categories/index
-/cms/articles/index
-/cms/menu/index
+/slider/categories/index
+/slider/slides/index
+/slider/tags/index
 ```
-
-> CKEditor use Elfinder plugin for save files and images. Refer [Elfinder readme](https://github.com/MihailDev/yii2-elfinder) for proper configuration
 
 ###Examples
 

@@ -9,7 +9,9 @@ use yii\behaviors\TimestampBehavior;
 
 /**
  * @property int $id
- * @property bool $common
+ * @property bool $common_image
+ * @property bool $common_link
+ * @property bool $common_text
  * @property bool $use_tags
  * @property string $slug
  * @property string $title_0
@@ -41,8 +43,8 @@ class Categories extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            ['common', 'required'],
-            ['common', 'boolean'],
+            [['common_image', 'common_link', 'common_text'], 'required'],
+            [['common_image', 'common_link', 'common_text'], 'boolean'],
 
             ['use_tags', 'required'],
             ['use_tags', 'boolean'],
@@ -82,7 +84,9 @@ class Categories extends \yii\db\ActiveRecord
 
         return [
             'id' => Yii::t('slider', 'ID'),
-            'common' => Yii::t('slider', 'Common'),
+            'common_image' => Yii::t('slider', 'Common image'),
+            'common_link' => Yii::t('slider', 'Common link'),
+            'common_text' => Yii::t('slider', 'Common text'),
             'use_tags' => Yii::t('slider', 'Use tags'),
             'slug' => Yii::t('slider', 'Slug'),
             'title_0' => Yii::t('slider', 'Title') . '(' . $language0 . ')',

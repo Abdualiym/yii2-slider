@@ -17,7 +17,7 @@ class m191004_071728_create_slider_slides_table extends Migration
         $this->createTable('{{%abdualiym_slider_slides}}', [
             'id' => $this->primaryKey(),
             'category_id' => $this->integer()->notNull(),
-            'status' => $this->tinyInteger()->notNull(),
+            'active' => $this->tinyInteger()->notNull(),
             'sort' => $this->tinyInteger()->notNull(),
             'photo_0' => $this->string(),
             'photo_1' => $this->string(),
@@ -27,7 +27,6 @@ class m191004_071728_create_slider_slides_table extends Migration
             'link_1' => $this->string(),
             'link_2' => $this->string(),
             'link_3' => $this->string(),
-            'slug' => $this->string()->notNull()->unique(),
             'title_0' => $this->string(),
             'title_1' => $this->string(),
             'title_2' => $this->string(),
@@ -40,8 +39,7 @@ class m191004_071728_create_slider_slides_table extends Migration
             'updated_at' => $this->integer()->unsigned()->notNull(),
         ], $tableOptions);
 
-        $this->createIndex('index-abdualiym_slider_slides-slug', 'abdualiym_slider_slides', 'slug', true);
-        $this->createIndex('index-abdualiym_slider_slides-status', 'abdualiym_slider_slides', 'status');
+        $this->createIndex('index-abdualiym_slider_slides-active', 'abdualiym_slider_slides', 'active');
 
         $this->createIndex('index-abdualiym_slider_slides-category_id', 'abdualiym_slider_slides', 'category_id');
         $this->addForeignKey('fkey-abdualiym_slider_slides-category_id', 'abdualiym_slider_slides', 'category_id', 'abdualiym_slider_categories', 'id', 'RESTRICT', 'RESTRICT');

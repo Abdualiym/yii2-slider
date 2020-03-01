@@ -16,7 +16,9 @@ class m191004_071721_create_slider_categories_table extends Migration
 
         $this->createTable('{{%abdualiym_slider_categories}}', [
             'id' => $this->primaryKey(),
-            'common' => $this->boolean()->notNull(),
+            'common_image' => $this->boolean()->notNull(),
+            'common_link' => $this->boolean()->notNull(),
+            'common_text' => $this->boolean()->notNull(),
             'use_tags' => $this->boolean()->notNull(),
             'slug' => $this->string()->notNull()->unique(),
             'title_0' => $this->string(),

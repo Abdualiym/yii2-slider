@@ -26,9 +26,10 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'id',
                 'value' => function ($model) use ($category) {
-                    return Html::a('<i class="glyphicon glyphicon-eye"></i>', ['view', 'id' => $model->id, 'slug' => $category->slug]);
+                    return Html::a('<i class="glyphicon glyphicon-eye-open"></i>', ['view', 'id' => $model->id, 'slug' => $category->slug]);
                 },
-                'label' => ''
+                'label' => '',
+                'format' => 'raw'
             ],
             'sort',
             [

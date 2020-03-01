@@ -1,6 +1,5 @@
 <?php
 
-use abdualiym\slider\entities\Categories;
 use abdualiym\slider\entities\Slides;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -8,6 +7,8 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model Slides */
 /* @var $form yii\widgets\ActiveForm */
+
+$columnCount = 12 / count(Yii::$app->params['slider']['languages2']);
 ?>
 
 <div class="articles-form">
@@ -20,7 +21,7 @@ use yii\widgets\ActiveForm;
     <div class="box">
         <div class="box-body row">
             <?php foreach (Yii::$app->params['slider']['languages2'] as $key => $language) : ?>
-                <div class="col-sm-6">
+                <div class="col-sm-<?= $columnCount ?>">
                     <?php if (!$category->common_image || ($category->common_image && $key == 0)): ?>
                         <?= $form->field($model, 'photo_' . $key)->widget(\kartik\file\FileInput::class, [
                             'options' => ['accept' => 'image/*'],
@@ -51,7 +52,7 @@ use yii\widgets\ActiveForm;
         <div class="box-header"><h2><?= Yii::t('slider', 'Text') ?></h2></div>
         <div class="box-body row">
             <?php foreach (Yii::$app->params['slider']['languages2'] as $key => $language) : ?>
-                <div class="col-sm-6">
+                <div class="col-sm-<?= $columnCount ?>">
                     <?php if (!$category->common_text || ($category->common_text && $key == 0)) : ?>
                         <?= $form->field($model, 'title_' . $key)->textInput(['maxlength' => true]) ?>
                         <?= $form->field($model, 'content_' . $key)->textarea(['rows' => 12]) ?>
@@ -75,7 +76,7 @@ use yii\widgets\ActiveForm;
                 <?= Html::submitButton(Yii::t('slider', 'Save'), ['class' => 'btn btn-success']) ?>
             </div>
             <?php foreach (Yii::$app->params['slider']['languages2'] as $key => $language) : ?>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <?php if (!$category->common_link || ($category->common_link && $key == 0)) : ?>
                         <?= $form->field($model, 'link_' . $key)->textInput(['maxlength' => true]) ?>
                     <?php endif; ?>

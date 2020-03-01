@@ -3,6 +3,7 @@
 namespace abdualiym\slider\entities;
 
 use Yii;
+use yii\base\Exception;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\ArrayHelper;
 use yiidreamteam\upload\ImageUploadBehavior;
@@ -30,11 +31,13 @@ use yiidreamteam\upload\ImageUploadBehavior;
  * @property string $content_3
  * @property int $created_at
  * @property int $updated_at
- * 
+ *
  * @property Categories $category
+ * @property Tags $tags
  */
 class Slides extends \yii\db\ActiveRecord
 {
+    public $tags;
     private $SliderModule;
 
     public function __construct($config = [])
@@ -68,6 +71,8 @@ class Slides extends \yii\db\ActiveRecord
             [['title_0', 'title_1', 'title_2', 'title_3'], 'string', 'max' => 255],
 
             [['content_0', 'content_1', 'content_2', 'content_3'], 'string'],
+
+            ['tags', 'each', 'rule' => ['integer']]
         ];
     }
 
@@ -150,5 +155,44 @@ class Slides extends \yii\db\ActiveRecord
                 'md' => ['width' => 212, 'height' => 120],
             ])
         ];
+    }
+
+    public function getTagsList($ownTags = false)
+    {
+        $tagsQuery = Tags::find()->select(['title_0', 'id'])->indexBy('id');
+        if ($ownTags) {
+            $tagIds = SlideTags::find()->where(['slide_id' => $this->id])->select('tag_id')->column();
+            $tagsQuery->where(['id' => $tagIds]);
+        }
+
+        return $tagsQuery->column();
+    }
+
+    public function beforeSave($insert)
+    {
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+
+        try {
+            SlideTags::deleteAll(['slide_id' => $this->id]);
+            if (is_array($this->tags)) {
+                foreach ($this->tags as $tagId) {
+                    $tagsModel = new SlideTags();
+                    $tagsModel->tag_id = $tagId;
+                    $tagsModel->slide_id = $this->id;
+                    $tagsModel->save();
+                }
+            }
+            return true;
+        } catch (Exception $e) {
+            Yii::$app->session->setFlash('error', $e->getMessage());
+        }
+    }
+
+    public function afterFind()
+    {
+        parent::afterFind();
+        $this->tags = SlideTags::find()->select('tag_id')->where(['slide_id' => $this->id])->column();
     }
 }

@@ -73,6 +73,13 @@ $columnCount = 12 / count(Yii::$app->params['slider']['languages2']);
             <?php endforeach; ?>
         </div>
 
+        <?php if ($category->use_tags) : ?>
+            <h3 class="box-header"><?= Yii::t('slider', 'Tags') ?></h3>
+            <div class="box-body text-bold">
+                <?= implode('<br>', $model->getTagsList(true)) ?>
+            </div>
+        <?php endif; ?>
+
         <h3 class="box-header"><?= Yii::t('slider', 'Link') ?></h3>
         <div class="box-body">
             <?php foreach (Yii::$app->params['slider']['languages2'] as $key => $language) : ?>

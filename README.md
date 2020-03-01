@@ -53,6 +53,8 @@ php yii migrate/up --migrationPath=@vendor/abdualiym/yii2-slider/migrations
 /slider/tags/index
 ```
 
+> For using SlidesController actions you must manual specify their category slug in route.
+
 ###Examples
 
 Extension registers next language arrays to Yii::$app->params[] for use in views:

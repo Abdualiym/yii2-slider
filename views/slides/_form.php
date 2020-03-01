@@ -63,6 +63,16 @@ $columnCount = 12 / count(Yii::$app->params['slider']['languages2']);
     </div>
 
 
+    <?php if ($category->use_tags) : ?>
+        <div class="box">
+            <div class="box-header"><h2><?= Yii::t('slider', 'Tags') ?></h2></div>
+            <div class="box-body">
+                <?= $form->field($model, 'tags')->checkboxList($model->getTagsList())->label(false) ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
+
     <div class="box">
         <div class="box-header"><h2></h2></div>
         <div class="box-body">

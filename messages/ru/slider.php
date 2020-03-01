@@ -6,49 +6,34 @@ return [
     'Updated at' => 'Время обновления',
     'Created At' => 'Время создания',
     'Updated At' => 'Время обновления',
+    'Categories' => 'Категории',
     'Category' => 'Категория',
+
     'Title' => 'Название',
     'Slug' => 'Слаг(ЧПУ)',
     'Description' => 'Описание',
-    'Photo' => 'Картинка',
-    'Date' => 'Дата',
-    'Type' => 'Тип',
-    'Article' => 'Статья',
-    'Slides' => 'Статьи',
-    'Page' => 'Страница',
-    'Pages' => 'Страницы',
-    'Save' => 'Сохранить',
-    'Categories' => 'Категории',
-
-    'Status' => 'Статус',
     'Content' => 'Описание',
-    'Type Helper' => 'Значение',
+    'Active' => 'Актив',
     'Sort' => 'Сортировка',
-
-    'action' => 'действие',
-    'Menu' => 'Меню',
-
-
-
-    'No parent' => 'Нет парент ',
-    'Parent ID' => 'Парент Ид',
     'ID' => 'Ид',
 
-    'Parent' => 'Парент',
+    'Photo' => 'Картинка',
 
+    'Slides' => 'Слайды',
+
+    'Use tags' => 'Использование меток',
+    'Common image' => 'Единый рисунок',
+    'Common link' => 'Единая ссылка',
+    'Common text' => 'Единый текст',
+
+    'Info' => 'Информация',
+    'Tags' => 'Метки',
+    'Text' => 'Текст',
+    'Link' => 'Ссылка',
+
+    'Save' => 'Сохранить',
     'Create' => 'Добавить',
     'Update' => 'Обновление',
     'Delete' => 'Удалить',
-    'Choose' => 'Выберите',
     'Upload' => 'Загрузить',
-
-    'Search on site' => 'Поиск по сайту',
-    'Search' => 'Поиск',
-    'Мore info' => 'Больше информации',
-
-    'Article Categories' => 'Статья Категории',
-    'Are you sure you want to delete this item?' => 'Вы уверены, что хотите удалить этот элемент?Вы уверены, что хотите удалить этот элемент?',
-    'The requested page does not exist.' => 'Запрашиваемая страница не существует.',
-    'Addresses of sales offices UZTELECOM' => 'Адреса офисов продаж УЗТЕЛЕКОМ',
-
 ];

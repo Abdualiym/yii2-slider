@@ -1,5 +1,6 @@
 <?php
 
+use abdualiym\slider\entities\Categories;
 use abdualiym\slider\forms\CategoriesSearch;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -25,6 +26,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'title_0',
             'slug',
+            [
+                'attribute' => 'id',
+                'value' => function (Categories $model) {
+                    return Html::a($model->title_0, ['/slider/slides/index', 'slug' => $model->slug]);
+                },
+                'label' => Yii::t('slider', 'View'),
+                'format' => 'raw'
+            ],
             'use_tags:boolean',
             'common_image:boolean',
             'common_link:boolean',

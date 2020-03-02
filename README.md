@@ -82,4 +82,17 @@ Extension registers next language arrays to Yii::$app->params[] for use in views
 
 ###Frontend widgets integration
 
+> get all slides by category slug
+```
+abdualiym\slider\entities\Slides::getSlidesBySlug($slug)
+
+```
+
+> get all tags
+```
+abdualiym\slider\entities\Tags::getSlidesBySlug($slug)
+
+```
+
+
 Copy from extension root directory example widgets for frontend integration  

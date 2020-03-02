@@ -168,6 +168,12 @@ class Slides extends \yii\db\ActiveRecord
         return $tagsQuery->column();
     }
 
+    public static function getSlidesBySlug($slug)
+    {
+        $category = Categories::findOne(['slug' => $slug]);
+        return Slides::find()->where(['category_id' => $category->id])->orderBy('sort')->all();
+    }
+
     public function beforeSave($insert)
     {
         if (!parent::beforeSave($insert)) {

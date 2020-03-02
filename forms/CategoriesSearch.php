@@ -11,7 +11,6 @@ class CategoriesSearch extends Categories
     public function rules()
     {
         return [
-            [['id', 'created_at', 'updated_at'], 'integer'],
             [['title_0', 'slug'], 'safe'],
         ];
     }
@@ -49,13 +48,6 @@ class CategoriesSearch extends Categories
             // $query->where('0=1');
             return $dataProvider;
         }
-
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ]);
 
         $query->andFilterWhere(['like', 'title_0', $this->title_0])
             ->andFilterWhere(['like', 'slug', $this->slug]);

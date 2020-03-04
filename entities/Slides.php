@@ -46,9 +46,26 @@ class Slides extends \yii\db\ActiveRecord
         parent::__construct($config);
     }
 
+    public static function getSlidesBySlug($slug, $count = false)
+    {
+        return (Yii::$app->getModule('slider'))->cacheComponent->getOrSet(
+            'slider_slides' . $count . $slug . YII_ENV,
+            function () use ($slug) {
+                $slidesQuery = Slides::find()->where(['category_id' => (Categories::findOne(['slug' => $slug]))->id]);
+                return $count ? $slidesQuery->count() : $slidesQuery->orderBy('sort')->all();
+            }, 0, new \yii\caching\DbDependency(['sql' => 'SELECT MAX(`updated_at`) FROM ' . self::tableName()])
+        );
+    }
+
     public static function tableName()
     {
         return 'abdualiym_slider_slides';
+    }
+
+    public static function getSlidesCountBySlug($slug)
+    {
+        $category = Categories::findOne(['slug' => $slug]);
+        return Slides::find()->where(['category_id' => $category->id])->count();
     }
 
     public function rules()
@@ -81,10 +98,10 @@ class Slides extends \yii\db\ActiveRecord
      */
     public function attributeLabels()
     {
-        $language0 = Yii::$app->params['slider']['languages2'][0] ?? '';
-        $language1 = Yii::$app->params['slider']['languages2'][1] ?? '';
-        $language2 = Yii::$app->params['slider']['languages2'][2] ?? '';
-        $language3 = Yii::$app->params['slider']['languages2'][3] ?? '';
+        $language0 = Yii::$app->params['cms']['languages2'][0] ?? '';
+        $language1 = Yii::$app->params['cms']['languages2'][1] ?? '';
+        $language2 = Yii::$app->params['cms']['languages2'][2] ?? '';
+        $language3 = Yii::$app->params['cms']['languages2'][3] ?? '';
 
         return [
             'id' => Yii::t('slider', 'ID'),
@@ -166,12 +183,6 @@ class Slides extends \yii\db\ActiveRecord
         }
 
         return $tagsQuery->column();
-    }
-
-    public static function getSlidesBySlug($slug)
-    {
-        $category = Categories::findOne(['slug' => $slug]);
-        return Slides::find()->where(['category_id' => $category->id])->orderBy('sort')->all();
     }
 
     public function beforeSave($insert)

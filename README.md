@@ -42,6 +42,7 @@ php yii migrate/up --migrationPath=@vendor/abdualiym/yii2-slider/migrations
                 'name' => 'O`zbek tili',
             ],
         ],
+        'cacheComponent' => 'memCache'
     ],
 ]
 ```
@@ -59,21 +60,21 @@ php yii migrate/up --migrationPath=@vendor/abdualiym/yii2-slider/migrations
 
 Extension registers next language arrays to Yii::$app->params[] for use in views:
 ```php
-\Yii::$app->params['slider']['languageIds'][$prefix] = $language['id'];
+\Yii::$app->params['cms']['languageIds'][$prefix] = $language['id'];
 [
     'en' => 2,
     'ru' => 1,
     ...
 ]
 
-\Yii::$app->params['slider']['languages'][$prefix] = $language['name'];
+\Yii::$app->params['cms']['languages'][$prefix] = $language['name'];
 [
     'en' => 'English',
     ...
 ]
 
 
-\Yii::$app->params['slider']['languages2'][$language['id']] = $language['name'];
+\Yii::$app->params['cms']['languages2'][$language['id']] = $language['name'];
 [
     2 => 'English',
     ...
@@ -88,11 +89,24 @@ abdualiym\slider\entities\Slides::getSlidesBySlug($slug)
 
 ```
 
-> get all tags
+> get all tags using cache
 ```
-abdualiym\slider\entities\Tags::getSlidesBySlug($slug)
+abdualiym\slider\entities\Tags::getTags()
 
 ```
+
+###Examples
+
+get photo url:
+```php
+abdualiym\language\Language::getPhotoUrl($object);
+```
+
+get attribute value by app language:
+```php
+abdualiym\language\Language::get($object, 'title');
+```
+
 
 
 Copy from extension root directory example widgets for frontend integration  

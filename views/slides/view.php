@@ -1,7 +1,7 @@
 <?php
 
 use abdualiym\slider\entities\Slides;
-use abdualiym\slider\helpers\Language;
+use abdualiym\language\Language;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -12,7 +12,7 @@ $this->title = $model->title_0;
 $this->params['breadcrumbs'][] = ['label' => $category->title_0, 'url' => ['index', 'slug' => $category->slug]];
 $this->params['breadcrumbs'][] = $this->title;
 
-$columnCount = 12 / count(Yii::$app->params['slider']['languages2']);
+$columnCount = 12 / count(Yii::$app->params['cms']['languages2']);
 ?>
 <div class="articles-view">
 
@@ -52,7 +52,7 @@ $columnCount = 12 / count(Yii::$app->params['slider']['languages2']);
     <div class="box">
         <h3 class="box-header"><?= Yii::t('slider', 'Photo') ?></h3>
         <div class="box-body row">
-            <?php foreach (Yii::$app->params['slider']['languages2'] as $key => $language) : ?>
+            <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
                 <div class="col-sm-<?= $columnCount ?>">
                     <?php if (!$category->common_image || ($category->common_image && $key == 0)): ?>
                         <?= Html::img($model->getThumbFileUrl('photo_' . $key, 'md'), ['class' => 'file-preview-image', 'alt' => '', 'title' => '']) ?>
@@ -61,12 +61,22 @@ $columnCount = 12 / count(Yii::$app->params['slider']['languages2']);
             <?php endforeach; ?>
         </div>
 
-        <h3 class="box-header"><?= Yii::t('slider', 'Info') ?></h3>
+        <h3 class="box-header"><?= Yii::t('slider', 'Title') ?></h3>
         <div class="box-body row">
-            <?php foreach (Yii::$app->params['slider']['languages2'] as $key => $language) : ?>
+            <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
                 <div class="col-sm-<?= $columnCount ?>">
                     <?php if (!$category->common_text || ($category->common_text && $key == 0)) : ?>
                         <?= Language::getAttribute($model, 'title', $key) ?>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <h3 class="box-header"><?= Yii::t('slider', 'Content') ?></h3>
+        <div class="box-body row">
+            <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
+                <div class="col-sm-<?= $columnCount ?>">
+                    <?php if (!$category->common_text || ($category->common_text && $key == 0)) : ?>
                         <?= Language::getAttribute($model, 'content', $key) ?>
                     <?php endif; ?>
                 </div>
@@ -82,7 +92,7 @@ $columnCount = 12 / count(Yii::$app->params['slider']['languages2']);
 
         <h3 class="box-header"><?= Yii::t('slider', 'Link') ?></h3>
         <div class="box-body">
-            <?php foreach (Yii::$app->params['slider']['languages2'] as $key => $language) : ?>
+            <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
                 <div class="col-sm-<?= $columnCount ?>">
                     <?php if (!$category->common_link || ($category->common_link && $key == 0)) : ?>
                         <?= Html::a(Language::getAttribute($model, 'link', $key), Language::getAttribute($model, 'link', $key), ['target' => '_blank']) ?>

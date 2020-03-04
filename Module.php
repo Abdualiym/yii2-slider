@@ -2,7 +2,7 @@
 
 namespace abdualiym\slider;
 
-use abdualiym\slider\helpers\Language;
+use abdualiym\language\Language;
 
 /**
  * Class Module
@@ -20,6 +20,7 @@ class Module extends \yii\base\Module
     public $storageHost;
     public $thumbs;
     public $languages;
+    public $cacheComponent = 'cache';
 
     public function init()
     {
@@ -32,15 +33,15 @@ class Module extends \yii\base\Module
     {
         $languageIds = [];
         foreach ($this->languages as $prefix => $language) {
-            \Yii::$app->params['slider']['languageIds'][$prefix] = $language['id'];
-            \Yii::$app->params['slider']['languages'][$prefix] = $language['name'];
-            \Yii::$app->params['slider']['languages2'][$language['id']] = $language['name'];
+            \Yii::$app->params['cms']['languageIds'][$prefix] = $language['id'];
+            \Yii::$app->params['cms']['languages'][$prefix] = $language['name'];
+            \Yii::$app->params['cms']['languages2'][$language['id']] = $language['name'];
         }
     }
 
     private function validateLanguages()
     {
-        if (count(array_diff(\Yii::$app->params['slider']['languageIds'], Language::dataKeys()))) {
+        if (count(array_diff(\Yii::$app->params['cms']['languageIds'], Language::dataKeys()))) {
             throw new \RuntimeException('Language key is invalid. Current support keys range is ' . json_encode(Language::dataKeys()));
         }
     }

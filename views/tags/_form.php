@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
                 </div>
             </div>
             <div class="row">
-                <?php foreach (Yii::$app->params['slider']['languages2'] as $key => $language) : ?>
+                <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
                     <div class="col-sm-3">
                         <?= $form->field($model, 'title_' . $key)->textInput(['maxlength' => true]) ?>
                     </div>

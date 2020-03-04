@@ -1,7 +1,7 @@
 <?php
 
 use abdualiym\slider\entities\Tags;
-use abdualiym\slider\helpers\Language;
+use abdualiym\language\Language;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <div class="box">
         <div class="box-body">
-                <?php foreach (Yii::$app->params['slider']['languages2'] as $key => $language) : ?>
+                <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
                     <div class="col-sm-3">
                         <p><?= $language ?></p>
                         <h2><?= Language::getAttribute($model, 'title', $key); ?></h2>

@@ -46,7 +46,7 @@ class Slides extends \yii\db\ActiveRecord
         parent::__construct($config);
     }
 
-    public static function getSlidesBySlug($slug, $count = false)
+    public static function getBySlug($slug, $count = false)
     {
         return (Yii::$app->getModule('slider'))->cacheComponent->getOrSet(
             'slider_slides' . $count . $slug . YII_ENV,

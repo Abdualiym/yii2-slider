@@ -167,14 +167,11 @@ class Slides extends \yii\db\ActiveRecord
         return $tagsQuery->column();
     }
 
-    public function beforeSave($insert)
+    public function afterSave($insert, $changedAttributes)
     {
-        if (!parent::beforeSave($insert)) {
-            return false;
-        }
-
         try {
             SlideTags::deleteAll(['slide_id' => $this->id]);
+
             if (is_array($this->tags)) {
                 foreach ($this->tags as $tagId) {
                     $tagsModel = new SlideTags();
@@ -187,6 +184,8 @@ class Slides extends \yii\db\ActiveRecord
         } catch (Exception $e) {
             Yii::$app->session->setFlash('error', $e->getMessage());
         }
+
+        parent::afterSave($insert, $changedAttributes);
     }
 
     public function afterFind()

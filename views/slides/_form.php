@@ -80,7 +80,7 @@ $columnCount = 12 / count(Yii::$app->params['cms']['languages2']);
                 <?= $form->field($model, 'sort')->textInput(['value' => $model->getSortValue($category->id)]) ?>
                 <br>
                 <?php
-                $model->active = $model->isNewRecord;
+                $model->active = $model->isNewRecord ?: $model->active;
                 echo $form->field($model, 'active')->checkbox();
                 ?>
                 <?= Html::submitButton(Yii::t('slider', 'Save'), ['class' => 'btn btn-success']) ?>

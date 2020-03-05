@@ -20,22 +20,10 @@ use yii\behaviors\TimestampBehavior;
  */
 class Tags extends \yii\db\ActiveRecord
 {
-    private $SliderModule;
 
-    public function __construct($config = [])
+    public static function getAll($count = false)
     {
-        $this->SliderModule = Yii::$app->getModule('slider');
-        parent::__construct($config);
-    }
-
-    public static function getBySlug($slug, $count = false)
-    {
-        return (Yii::$app->getModule('slider'))->cacheComponent->getOrSet(
-            'slider_tags' . $count . YII_ENV,
-            function () {
-                return $count ? Tags::find()->count() : Tags::find()->orderBy('sort')->all();
-            }, 0, new \yii\caching\DbDependency(['sql' => 'SELECT MAX(`updated_at`) FROM ' . self::tableName()])
-        );
+        return $count ? Tags::find()->count() : Tags::find()->orderBy('sort')->all();
     }
 
     public static function tableName()

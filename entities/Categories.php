@@ -27,13 +27,6 @@ use yii\behaviors\TimestampBehavior;
  */
 class Categories extends \yii\db\ActiveRecord
 {
-    private $SliderModule;
-
-    public function __construct($config = [])
-    {
-        $this->SliderModule = Yii::$app->getModule('slider');
-        parent::__construct($config);
-    }
 
     public static function tableName()
     {

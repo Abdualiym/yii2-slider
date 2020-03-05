@@ -95,9 +95,15 @@ abdualiym\slider\entities\Slides::getBySlug($slug, true)
 
 ```
 
-> get all tags using cache
+> get all tags
 ```
-abdualiym\slider\entities\Tags::getTags()
+abdualiym\slider\entities\Tags::getAll()
+
+```
+
+> get all tags count
+```
+abdualiym\slider\entities\Tags::getAll(true)
 
 ```
 

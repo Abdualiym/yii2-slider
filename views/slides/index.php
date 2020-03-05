@@ -11,8 +11,6 @@ use yii\helpers\Html;
 
 $this->title = $category->title_0;
 $this->params['breadcrumbs'][] = $this->title;
-
-\yii\helpers\VarDumper::dump(\abdualiym\slider\entities\Slides::getBySlug($category->slug), 12, true);
 ?>
 <div class="articles-index">
 

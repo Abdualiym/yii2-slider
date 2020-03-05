@@ -20,7 +20,6 @@ class Module extends \yii\base\Module
     public $storageHost;
     public $thumbs;
     public $languages;
-    public $cacheComponent = 'cache';
 
     public function init()
     {

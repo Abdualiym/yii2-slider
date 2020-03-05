@@ -85,7 +85,13 @@ Extension registers next language arrays to Yii::$app->params[] for use in views
 
 > get all slides by category slug
 ```
-abdualiym\slider\entities\Slides::getSlidesBySlug($slug)
+abdualiym\slider\entities\Slides::getBySlug($slug)
+
+```
+
+> get all slides count by category slug
+```
+abdualiym\slider\entities\Slides::getBySlug($slug, true)
 
 ```
 
@@ -95,18 +101,10 @@ abdualiym\slider\entities\Tags::getTags()
 
 ```
 
-###Examples
-
-get photo url:
-```php
-abdualiym\language\Language::getPhotoUrl($object);
-```
-
-get attribute value by app language:
-```php
-abdualiym\language\Language::get($object, 'title');
-```
+###Examples for use in frontend see [yii2-language](https://github.com/Abdualiym/yii2-language) extension
 
 
+---
 
-Copy from extension root directory example widgets for frontend integration  
+> TODO 
+ - Copy from extension root directory example widgets for frontend integration  

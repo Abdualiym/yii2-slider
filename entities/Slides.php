@@ -62,12 +62,6 @@ class Slides extends \yii\db\ActiveRecord
         return 'abdualiym_slider_slides';
     }
 
-    public static function getSlidesCountBySlug($slug)
-    {
-        $category = Categories::findOne(['slug' => $slug]);
-        return Slides::find()->where(['category_id' => $category->id])->count();
-    }
-
     public function rules()
     {
         return [

@@ -2,7 +2,7 @@
 
 namespace abdualiym\slider\entities;
 
-use abdualiym\slider\Language;
+use abdualiym\language\Language;
 use abdualiym\slider\validators\SlugValidator;
 use Yii;
 use yii\behaviors\TimestampBehavior;

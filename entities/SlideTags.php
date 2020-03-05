@@ -3,7 +3,7 @@
 namespace abdualiym\slider\entities;
 
 use abdualiym\slider\validators\SlugValidator;
-use abdualiym\slider\Language;
+use abdualiym\language\Language;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 

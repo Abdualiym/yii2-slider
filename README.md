@@ -42,7 +42,6 @@ php yii migrate/up --migrationPath=@vendor/abdualiym/yii2-slider/migrations
                 'name' => 'O`zbek tili',
             ],
         ],
-        'cacheComponent' => 'memCache'
     ],
 ]
 ```
@@ -50,7 +49,7 @@ php yii migrate/up --migrationPath=@vendor/abdualiym/yii2-slider/migrations
 - In admin panel add belove links for manage pages, article categories, articles and menu:
 ```php
 /slider/categories/index
-/slider/slides/index
+/slider/slides/index?slug=your_category_slug_name
 /slider/tags/index
 ```
 

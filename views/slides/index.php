@@ -6,17 +6,18 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel SlidesSearch */
+/* @var $category \abdualiym\slider\entities\Categories */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$slug = Yii::$app->request->get('slug');
-$category = \abdualiym\slider\entities\Categories::findOne(['slug' => $slug]);
 $this->title = $category->title_0;
 $this->params['breadcrumbs'][] = $this->title;
+
+\yii\helpers\VarDumper::dump(\abdualiym\slider\entities\Slides::getBySlug($category->slug), 12, true);
 ?>
 <div class="articles-index">
 
     <p>
-        <?= Html::a(Yii::t('slider', 'Create'), ['create', 'slug' => $slug], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('slider', 'Create'), ['create', 'slug' => $category->slug], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

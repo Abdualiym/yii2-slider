@@ -7,6 +7,7 @@ use yii\base\Exception;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\ArrayHelper;
 use yiidreamteam\upload\ImageUploadBehavior;
+use SuperClosure\Serializer;
 
 /**
  * @property int $id
@@ -48,12 +49,23 @@ class Slides extends \yii\db\ActiveRecord
 
     public static function getBySlug($slug, $count = false)
     {
-        return (Yii::$app->getModule('slider'))->cacheComponent->getOrSet(
+        $cacheName = (Yii::$app->getModule('slider'))->cacheComponent;
+
+        $serializer = new Serializer();
+
+        $hello = function () use ($slug, $count) {
+            $slidesQuery = Slides::find()->where(['category_id' => (Categories::findOne(['slug' => $slug]))->id]);
+            return $count ? $slidesQuery->count() : $slidesQuery->orderBy('sort')->all();
+        };
+
+        $serialized = $serializer->serialize($hello);
+        $unserialized = $serializer->unserialize($serialized);
+
+        return Yii::$app->{$cacheName}->getOrSet(
             'slider_slides' . $count . $slug . YII_ENV,
-            function () use ($slug) {
-                $slidesQuery = Slides::find()->where(['category_id' => (Categories::findOne(['slug' => $slug]))->id]);
-                return $count ? $slidesQuery->count() : $slidesQuery->orderBy('sort')->all();
-            }, 0, new \yii\caching\DbDependency(['sql' => 'SELECT MAX(`updated_at`) FROM ' . self::tableName()])
+            $unserialized($slug, $count),
+            0,
+            new \yii\caching\DbDependency(['sql' => 'SELECT MAX(`updated_at`) FROM ' . self::tableName()])
         );
     }
 

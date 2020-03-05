@@ -145,10 +145,10 @@ class Slides extends \yii\db\ActiveRecord
             'class' => ImageUploadBehavior::class,
             'attribute' => $attribute,
             'createThumbsOnRequest' => true,
-            'filePath' => $module->storageRoot . '/data/articles/[[attribute_id]]/[[filename]].[[extension]]',
-            'fileUrl' => $module->storageHost . '/data/articles/[[attribute_id]]/[[filename]].[[extension]]',
-            'thumbPath' => $module->storageRoot . '/cache/articles/[[attribute_id]]/[[profile]]_[[filename]].[[extension]]',
-            'thumbUrl' => $module->storageHost . '/cache/articles/[[attribute_id]]/[[profile]]_[[filename]].[[extension]]',
+            'filePath' => $module->storageRoot . '/data/slides/[[attribute_id]]/[[filename]].[[extension]]',
+            'fileUrl' => $module->storageHost . '/data/slides/[[attribute_id]]/[[filename]].[[extension]]',
+            'thumbPath' => $module->storageRoot . '/cache/slides/[[attribute_id]]/[[profile]]_[[filename]].[[extension]]',
+            'thumbUrl' => $module->storageHost . '/cache/slides/[[attribute_id]]/[[profile]]_[[filename]].[[extension]]',
             'thumbs' => array_merge($module->thumbs, [
                 'sm' => ['width' => 106, 'height' => 60],
                 'md' => ['width' => 212, 'height' => 120],
@@ -169,6 +169,8 @@ class Slides extends \yii\db\ActiveRecord
 
     public function afterSave($insert, $changedAttributes)
     {
+        parent::afterSave($insert, $changedAttributes);
+
         try {
             SlideTags::deleteAll(['slide_id' => $this->id]);
 
@@ -184,8 +186,6 @@ class Slides extends \yii\db\ActiveRecord
         } catch (Exception $e) {
             Yii::$app->session->setFlash('error', $e->getMessage());
         }
-
-        parent::afterSave($insert, $changedAttributes);
     }
 
     public function afterFind()

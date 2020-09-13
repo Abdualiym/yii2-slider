@@ -21,6 +21,10 @@ use yiidreamteam\upload\ImageUploadBehavior;
  * @property string $link_1
  * @property string $link_2
  * @property string $link_3
+ * @property string $input_0
+ * @property string $input_1
+ * @property string $input_2
+ * @property string $input_3
  * @property string $title_0
  * @property string $title_1
  * @property string $title_2
@@ -65,7 +69,9 @@ class Slides extends \yii\db\ActiveRecord
 
             [['photo_0', 'photo_1', 'photo_2', 'photo_3'], 'image'],
 
-            [['link_0', 'link_1', 'link_2', 'link_3'], 'url', 'defaultScheme' => 'http'],
+//            [['link_0', 'link_1', 'link_2', 'link_3'], 'url', 'defaultScheme' => 'http'],
+            [['link_0', 'link_1', 'link_2', 'link_3'], 'string', 'max' => 255],
+            [['input_0', 'input_1', 'input_2', 'input_3'], 'string', 'max' => 255],
 
             [['title_0', 'title_1', 'title_2', 'title_3'], 'string', 'max' => 255],
 
@@ -98,6 +104,10 @@ class Slides extends \yii\db\ActiveRecord
             'link_1' => Yii::t('slider', 'Link') . '(' . $language1 . ')',
             'link_2' => Yii::t('slider', 'Link') . '(' . $language2 . ')',
             'link_3' => Yii::t('slider', 'Link') . '(' . $language3 . ')',
+//            'input_0' => Yii::t('slider', 'Link') . '(' . $language0 . ')',
+//            'input_1' => Yii::t('slider', 'Link') . '(' . $language1 . ')',
+//            'input_2' => Yii::t('slider', 'Link') . '(' . $language2 . ')',
+//            'input_3' => Yii::t('slider', 'Link') . '(' . $language3 . ')',
             'title_0' => Yii::t('slider', 'Title') . '(' . $language0 . ')',
             'title_1' => Yii::t('slider', 'Title') . '(' . $language1 . ')',
             'title_2' => Yii::t('slider', 'Title') . '(' . $language2 . ')',

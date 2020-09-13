@@ -1,12 +1,13 @@
 <?php
 
-use abdualiym\slider\entities\Slides;
 use abdualiym\language\Language;
+use abdualiym\slider\entities\Slides;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model Slides */
+/* @var $category \abdualiym\slider\entities\Categories */
 
 $this->title = $model->title_0;
 $this->params['breadcrumbs'][] = ['label' => $category->title_0, 'url' => ['index', 'slug' => $category->slug]];
@@ -90,13 +91,20 @@ $columnCount = 12 / count(Yii::$app->params['cms']['languages2']);
             </div>
         <?php endif; ?>
 
-        <h3 class="box-header"><?= Yii::t('slider', 'Link') ?></h3>
+        <h3 class="box-header"><?= $category->link_label ?></h3>
         <div class="box-body">
             <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
                 <div class="col-sm-<?= $columnCount ?>">
-                    <?php if (!$category->common_link || ($category->common_link && $key == 0)) : ?>
-                        <?= Html::a(Language::getAttribute($model, 'link', $key), Language::getAttribute($model, 'link', $key), ['target' => '_blank']) ?>
-                    <?php endif; ?>
+                    <?php if (!$category->common_link || ($category->common_link && $key == 0)) {echo Language::getAttribute($model, 'link', $key);} ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <h3 class="box-header"><?= $category->input_label ?></h3>
+        <div class="box-body">
+            <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
+                <div class="col-sm-<?= $columnCount ?>">
+                    <?php if (!$category->common_input || ($category->common_input && $key == 0)) {echo Language::getAttribute($model, 'input', $key);} ?>
                 </div>
             <?php endforeach; ?>
         </div>

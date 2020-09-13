@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'id',
                 'value' => function ($model) use ($category) {
-                    return Html::a('<i class="glyphicon glyphicon-eye-open"></i>', ['view', 'id' => $model->id, 'slug' => $category->slug]);
+                    return Html::a('<i class="glyphicon glyphicon-list-alt"></i> ' . Yii::t('yii', 'View'), ['view', 'id' => $model->id, 'slug' => $category->slug]);
                 },
                 'label' => '',
                 'format' => 'raw'
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'format' => 'raw'
             ],
-            'link_0:url',
+//            'link_0:url',
             'title_0',
             'active:boolean',
         ],

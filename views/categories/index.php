@@ -35,9 +35,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw'
             ],
             'use_tags:boolean',
+            'use_editor:boolean',
             'common_image:boolean',
             'common_link:boolean',
             'common_text:boolean',
+            'common_input:boolean',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

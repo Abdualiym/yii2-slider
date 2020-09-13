@@ -20,18 +20,29 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="box">
         <div class="box-body row">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <?= DetailView::widget([
                     'model' => $model,
                     'attributes' => [
                         'common_image:boolean',
-                        'common_link:boolean',
                         'common_text:boolean',
                         'use_tags:boolean',
+                        'use_editor:boolean',
                     ],
                 ]) ?>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
+                <?= DetailView::widget([
+                    'model' => $model,
+                    'attributes' => [
+                        'common_link:boolean',
+                        'link_label',
+                        'common_input:boolean',
+                        'input_label',
+                    ],
+                ]) ?>
+            </div>
+            <div class="col-sm-4">
                 <?= DetailView::widget([
                     'model' => $model,
                     'attributes' => [

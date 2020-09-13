@@ -6,6 +6,7 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model Slides */
+/* @var $category \abdualiym\slider\entities\Categories */
 /* @var $form yii\widgets\ActiveForm */
 
 $columnCount = 12 / count(Yii::$app->params['cms']['languages2']);
@@ -55,7 +56,20 @@ $columnCount = 12 / count(Yii::$app->params['cms']['languages2']);
                 <div class="col-sm-<?= $columnCount ?>">
                     <?php if (!$category->common_text || ($category->common_text && $key == 0)) : ?>
                         <?= $form->field($model, 'title_' . $key)->textInput(['maxlength' => true]) ?>
-                        <?= $form->field($model, 'content_' . $key)->textarea(['rows' => 12]) ?>
+                        <?php
+                        if ($category->use_editor) {
+                            echo $form->field($model, 'content_' . $key)->widget(\sadovojav\ckeditor\CKEditor::class, [
+                                'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('elfinder', [
+                                    'preset' => 'standard',
+                                    'extraPlugins' => 'image2,widget,oembed,video',
+                                    'language' => Yii::$app->language,
+                                    'height' => 600,
+                                ]),
+                            ]);
+                        } else {
+                            echo $form->field($model, 'content_' . $key)->textarea(['rows' => 12]);
+                        }
+                        ?>
                     <?php endif; ?>
                 </div>
             <?php endforeach; ?>
@@ -74,24 +88,48 @@ $columnCount = 12 / count(Yii::$app->params['cms']['languages2']);
 
 
     <div class="box">
+        <div class="box-header"><h2><?= $category->link_label ?></h2></div>
+        <div class="box-body">
+            <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
+                <div class="col-sm-2">
+                    <?php if (!$category->common_link || ($category->common_link && $key == 0)) : ?>
+                        <?= $form->field($model, 'link_' . $key)->textInput(['maxlength' => true])->label($category->link_label . "(" . $language . ")") ?>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+
+    <div class="box">
+        <div class="box-header"><h2><?= $category->input_label ?></h2></div>
+        <div class="box-body">
+            <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
+                <div class="col-sm-2">
+                    <?php if (!$category->common_input || ($category->common_input && $key == 0)) : ?>
+                        <?= $form->field($model, 'input_' . $key)->textInput(['maxlength' => true])->label($category->input_label . "(" . $language . ")") ?>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+
+    <div class="box">
         <div class="box-header"><h2></h2></div>
         <div class="box-body">
             <div class="col-sm-2">
                 <?= $form->field($model, 'sort')->textInput(['value' => $model->getSortValue($category->id)]) ?>
+            </div>
+            <div class="col-sm-2">
                 <br>
                 <?php
                 $model->active = $model->isNewRecord ?: $model->active;
                 echo $form->field($model, 'active')->checkbox();
                 ?>
+            </div>
+            <div class="col-sm-2">
+                <br>
                 <?= Html::submitButton(Yii::t('slider', 'Save'), ['class' => 'btn btn-success']) ?>
             </div>
-            <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
-                <div class="col-sm-2">
-                    <?php if (!$category->common_link || ($category->common_link && $key == 0)) : ?>
-                        <?= $form->field($model, 'link_' . $key)->textInput(['maxlength' => true]) ?>
-                    <?php endif; ?>
-                </div>
-            <?php endforeach; ?>
         </div>
     </div>
 

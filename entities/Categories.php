@@ -3,7 +3,6 @@
 namespace abdualiym\slider\entities;
 
 use abdualiym\slider\validators\SlugValidator;
-use abdualiym\language\Language;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -13,6 +12,10 @@ use yii\behaviors\TimestampBehavior;
  * @property bool $common_link
  * @property bool $common_text
  * @property bool $use_tags
+ * @property bool $use_editor
+ * @property bool $common_input
+ * @property string $link_label
+ * @property string $input_label
  * @property string $slug
  * @property string $title_0
  * @property string $title_1
@@ -36,11 +39,8 @@ class Categories extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['common_image', 'common_link', 'common_text'], 'required'],
-            [['common_image', 'common_link', 'common_text'], 'boolean'],
-
-            ['use_tags', 'required'],
-            ['use_tags', 'boolean'],
+            [['common_image', 'common_link', 'common_text', 'common_input', 'use_tags', 'use_editor'], 'required'],
+            [['common_image', 'common_link', 'common_text', 'common_input', 'use_tags', 'use_editor'], 'boolean'],
 
             ['slug', 'required'],
             [['slug'], 'unique'],
@@ -59,7 +59,8 @@ class Categories extends \yii\db\ActiveRecord
                 return in_array(3, Yii::$app->params['cms']['languageIds']);
             }],
 
-            [['title_0', 'title_1', 'title_2', 'title_3', 'slug'], 'string', 'max' => 255],
+            [['link_label', 'input_label'], 'required'],
+            [['title_0', 'title_1', 'title_2', 'title_3', 'slug', 'link_label', 'input_label'], 'string', 'max' => 255],
 
             [['description_0', 'description_1', 'description_2', 'description_3'], 'string'],
         ];
@@ -80,7 +81,11 @@ class Categories extends \yii\db\ActiveRecord
             'common_image' => Yii::t('slider', 'Common image'),
             'common_link' => Yii::t('slider', 'Common link'),
             'common_text' => Yii::t('slider', 'Common text'),
+            'common_input' => Yii::t('slider', 'Common input'),
             'use_tags' => Yii::t('slider', 'Use tags'),
+            'use_editor' => Yii::t('slider', 'Use editor'),
+            'link_label' => Yii::t('slider', 'Link label'),
+            'input_label' => Yii::t('slider', 'Input label'),
             'slug' => Yii::t('slider', 'Slug'),
             'title_0' => Yii::t('slider', 'Title') . '(' . $language0 . ')',
             'title_1' => Yii::t('slider', 'Title') . '(' . $language1 . ')',

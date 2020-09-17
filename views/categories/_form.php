@@ -22,27 +22,12 @@ use yii\widgets\ActiveForm;
                     <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
                 </div>
                 <div class="col-sm-3">
-                    <?= $form->field($model, 'link_label')->textInput(['maxlength' => true]) ?>
-                </div>
-                <div class="col-sm-3">
-                    <?= $form->field($model, 'input_label')->textInput(['maxlength' => true]) ?>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-3">
-                    <?= $form->field($model, 'common_image')->checkbox() ?>
-                    <?= $form->field($model, 'common_text')->checkbox() ?>
-                </div>
-                <div class="col-sm-3">
+                    <br>
                     <?= $form->field($model, 'use_tags')->checkbox() ?>
-                    <?= $form->field($model, 'use_editor')->checkbox() ?>
                 </div>
                 <div class="col-sm-3">
-                    <?= $form->field($model, 'common_link')->checkbox() ?>
-                </div>
-                <div class="col-sm-3">
-                    <?= $form->field($model, 'common_input')->checkbox() ?>
+                    <br>
+                    <?= $form->field($model, 'common_image')->checkbox() ?>
                 </div>
             </div>
         </div>
@@ -50,21 +35,52 @@ use yii\widgets\ActiveForm;
 
     <div class="box">
         <div class="box-body">
-            <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
-                <div class="col-sm-3">
-                    <p><?= $language ?></p>
-                    <?= $form->field($model, 'title_' . $key)->textInput(['maxlength' => true]) ?>
-                    <?= $form->field($model, 'description_' . $key)->textarea() ?>
-                </div>
-            <?php endforeach; ?>
+            <div class="row">
+                <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
+                    <div class="col-sm-3">
+                        <?= $form->field($model, 'title_' . $key)->textInput(['maxlength' => true]) ?>
+                        <?= $form->field($model, 'description_' . $key)->textarea() ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="form-group">
-    <?= Html::submitButton(Yii::t('slider', 'Save'), ['class' => 'btn btn-success']) ?>
-</div>
+    <div class="box">
+        <div class="box-body">
+            <div class="row">
+                <div class="col-sm-3">
+                    <b>Koнтент</b>
+                    <br>
+                    <br>
+                    <?= $form->field($model, 'common_text')->checkbox() ?>
+                    <?= $form->field($model, 'use_editor')->checkbox() ?>
+                </div>
+                <div class="col-sm-3">
+                    <?= $form->field($model, 'text_2_label')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'use_text_2')->checkbox() ?>
+                    <?= $form->field($model, 'common_text_2')->checkbox() ?>
+                    <?= $form->field($model, 'use_editor_2')->checkbox() ?>
+                </div>
+                <div class="col-sm-3">
+                    <?= $form->field($model, 'link_label')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'use_link')->checkbox() ?>
+                    <?= $form->field($model, 'common_link')->checkbox() ?>
+                </div>
+                <div class="col-sm-3">
+                    <?= $form->field($model, 'input_label')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'use_input')->checkbox() ?>
+                    <?= $form->field($model, 'common_input')->checkbox() ?>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<?php ActiveForm::end(); ?>
+
+    <div class="form-group">
+        <?= Html::submitButton(Yii::t('slider', 'Save'), ['class' => 'btn btn-success']) ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
 
 </div>

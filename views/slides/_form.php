@@ -54,9 +54,9 @@ $columnCount = 12 / count(Yii::$app->params['cms']['languages2']);
         <div class="box-body row">
             <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
                 <div class="col-sm-<?= $columnCount ?>">
-                    <?php if (!$category->common_text || ($category->common_text && $key == 0)) : ?>
-                        <?= $form->field($model, 'title_' . $key)->textInput(['maxlength' => true]) ?>
-                        <?php
+                    <?php
+                    if (!$category->common_text || ($category->common_text && $key == 0)) {
+                        echo $form->field($model, 'title_' . $key)->textInput(['maxlength' => true]);
                         if ($category->use_editor) {
                             echo $form->field($model, 'content_' . $key)->widget(\sadovojav\ckeditor\CKEditor::class, [
                                 'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('elfinder', [
@@ -69,8 +69,25 @@ $columnCount = 12 / count(Yii::$app->params['cms']['languages2']);
                         } else {
                             echo $form->field($model, 'content_' . $key)->textarea(['rows' => 12]);
                         }
-                        ?>
-                    <?php endif; ?>
+                    }
+
+                    if ($category->use_text_2) {
+                        if (!$category->common_text_2 || ($category->common_text_2 && $key == 0)) {
+                            if ($category->use_editor_2) {
+                                echo $form->field($model, 'text_2_' . $key)->widget(\sadovojav\ckeditor\CKEditor::class, [
+                                    'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('elfinder', [
+                                        'preset' => 'standard',
+                                        'extraPlugins' => 'image2,widget,oembed,video',
+                                        'language' => Yii::$app->language,
+                                        'height' => 600,
+                                    ]),
+                                ])->label($category->text_2_label . "(" . $language . ")");
+                            } else {
+                                echo $form->field($model, 'text_2_' . $key)->textarea(['rows' => 12])->label($category->text_2_label . "(" . $language . ")");
+                            }
+                        }
+                    }
+                    ?>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -86,32 +103,35 @@ $columnCount = 12 / count(Yii::$app->params['cms']['languages2']);
         </div>
     <?php endif; ?>
 
-
-    <div class="box">
-        <div class="box-header"><h2><?= $category->link_label ?></h2></div>
-        <div class="box-body">
-            <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
-                <div class="col-sm-2">
-                    <?php if (!$category->common_link || ($category->common_link && $key == 0)) : ?>
-                        <?= $form->field($model, 'link_' . $key)->textInput(['maxlength' => true])->label($category->link_label . "(" . $language . ")") ?>
-                    <?php endif; ?>
-                </div>
-            <?php endforeach; ?>
+    <?php if ($category->use_link) : ?>
+        <div class="box">
+            <div class="box-header"><h2><?= $category->link_label ?></h2></div>
+            <div class="box-body">
+                <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
+                    <div class="col-sm-2">
+                        <?php if (!$category->common_link || ($category->common_link && $key == 0)) : ?>
+                            <?= $form->field($model, 'link_' . $key)->textInput(['maxlength' => true])->label($category->link_label . "(" . $language . ")") ?>
+                        <?php endif; ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
-    </div>
+    <?php endif; ?>
 
-    <div class="box">
-        <div class="box-header"><h2><?= $category->input_label ?></h2></div>
-        <div class="box-body">
-            <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
-                <div class="col-sm-2">
-                    <?php if (!$category->common_input || ($category->common_input && $key == 0)) : ?>
-                        <?= $form->field($model, 'input_' . $key)->textInput(['maxlength' => true])->label($category->input_label . "(" . $language . ")") ?>
-                    <?php endif; ?>
-                </div>
-            <?php endforeach; ?>
+    <?php if ($category->use_input) : ?>
+        <div class="box">
+            <div class="box-header"><h2><?= $category->input_label ?></h2></div>
+            <div class="box-body">
+                <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
+                    <div class="col-sm-2">
+                        <?php if (!$category->common_input || ($category->common_input && $key == 0)) : ?>
+                            <?= $form->field($model, 'input_' . $key)->textInput(['maxlength' => true])->label($category->input_label . "(" . $language . ")") ?>
+                        <?php endif; ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
-    </div>
+    <?php endif; ?>
 
     <div class="box">
         <div class="box-header"><h2></h2></div>

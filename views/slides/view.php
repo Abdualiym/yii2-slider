@@ -43,7 +43,7 @@ $columnCount = 12 / count(Yii::$app->params['cms']['languages2']);
                         'attributes' => [
                             'created_at:datetime',
                             'updated_at:datetime',
-                        ],
+                        ]
                     ]) ?>
                 </div>
             </div>
@@ -51,7 +51,7 @@ $columnCount = 12 / count(Yii::$app->params['cms']['languages2']);
     </div>
 
     <div class="box">
-        <h3 class="box-header"><?= Yii::t('slider', 'Photo') ?></h3>
+        <b class="box-header"><?= Yii::t('slider', 'Photo') ?></b>
         <div class="box-body row">
             <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
                 <div class="col-sm-<?= $columnCount ?>">
@@ -61,8 +61,9 @@ $columnCount = 12 / count(Yii::$app->params['cms']['languages2']);
                 </div>
             <?php endforeach; ?>
         </div>
+        <br>
 
-        <h3 class="box-header"><?= Yii::t('slider', 'Title') ?></h3>
+        <b class="box-header"><?= Yii::t('slider', 'Title') ?></b>
         <div class="box-body row">
             <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
                 <div class="col-sm-<?= $columnCount ?>">
@@ -72,8 +73,9 @@ $columnCount = 12 / count(Yii::$app->params['cms']['languages2']);
                 </div>
             <?php endforeach; ?>
         </div>
+        <br>
 
-        <h3 class="box-header"><?= Yii::t('slider', 'Content') ?></h3>
+        <b class="box-header"><?= Yii::t('slider', 'Content') ?></b>
         <div class="box-body row">
             <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
                 <div class="col-sm-<?= $columnCount ?>">
@@ -83,32 +85,57 @@ $columnCount = 12 / count(Yii::$app->params['cms']['languages2']);
                 </div>
             <?php endforeach; ?>
         </div>
+        <br>
+
+        <?php if ($category->use_text_2) : ?>
+            <b class="box-header"><?= $category->text_2_label ?></b>
+            <div class="box-body row">
+                <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
+                    <div class="col-sm-<?= $columnCount ?>">
+                        <?php if (!$category->common_text_2 || ($category->common_text_2 && $key == 0)) : ?>
+                            <?= Language::getAttribute($model, 'text_2', $key) ?>
+                        <?php endif; ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <br>
+        <?php endif; ?>
 
         <?php if ($category->use_tags) : ?>
-            <h3 class="box-header"><?= Yii::t('slider', 'Tags') ?></h3>
+            <b class="box-header"><?= Yii::t('slider', 'Tags') ?></b>
             <div class="box-body text-bold">
                 <?= implode('<br>', $model->getTagsList(true)) ?>
             </div>
+            <br>
         <?php endif; ?>
 
-        <h3 class="box-header"><?= $category->link_label ?></h3>
-        <div class="box-body">
-            <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
-                <div class="col-sm-<?= $columnCount ?>">
-                    <?php if (!$category->common_link || ($category->common_link && $key == 0)) {echo Language::getAttribute($model, 'link', $key);} ?>
-                </div>
-            <?php endforeach; ?>
-        </div>
+        <?php if ($category->use_link) : ?>
+            <b class="box-header"><?= $category->link_label ?></b>
+            <div class="box-body">
+                <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
+                    <div class="col-sm-<?= $columnCount ?>">
+                        <?php if (!$category->common_link || ($category->common_link && $key == 0)) {
+                            echo Language::getAttribute($model, 'link', $key);
+                        } ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <br>
+        <?php endif; ?>
 
-        <h3 class="box-header"><?= $category->input_label ?></h3>
-        <div class="box-body">
-            <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
-                <div class="col-sm-<?= $columnCount ?>">
-                    <?php if (!$category->common_input || ($category->common_input && $key == 0)) {echo Language::getAttribute($model, 'input', $key);} ?>
-                </div>
-            <?php endforeach; ?>
-        </div>
-        <br>
+        <?php if ($category->use_input) : ?>
+            <b class="box-header"><?= $category->input_label ?></b>
+            <div class="box-body">
+                <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>
+                    <div class="col-sm-<?= $columnCount ?>">
+                        <?php if (!$category->common_input || ($category->common_input && $key == 0)) {
+                            echo Language::getAttribute($model, 'input', $key);
+                        } ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <br>
+        <?php endif; ?>
     </div>
 </div>
 
@@ -119,6 +146,6 @@ $columnCount = 12 / count(Yii::$app->params['cms']['languages2']);
         'data' => [
             'confirm' => Yii::t('slider', 'Are you sure you want to delete this item?'),
             'method' => 'post',
-        ],
+        ]
     ]) ?>
 </p>

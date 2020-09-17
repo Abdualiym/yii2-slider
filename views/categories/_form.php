@@ -50,9 +50,9 @@ use yii\widgets\ActiveForm;
         <div class="box-body">
             <div class="row">
                 <div class="col-sm-3">
-                    <b>Koнтент</b>
-                    <br>
-                    <br>
+                    <?= $form->field($model, 'checkbox_label')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'use_checkbox')->checkbox() ?>
+                    <hr>
                     <?= $form->field($model, 'common_text')->checkbox() ?>
                     <?= $form->field($model, 'use_editor')->checkbox() ?>
                 </div>

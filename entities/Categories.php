@@ -23,6 +23,9 @@ use yii\behaviors\TimestampBehavior;
 
  * @property bool $common_image
 
+ * @property bool $use_checkbox
+ * @property string $checkbox_label
+
  * @property bool $use_link
  * @property bool $common_link
  * @property string $link_label
@@ -51,8 +54,8 @@ class Categories extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['common_image', 'common_link', 'common_text', 'common_input', 'use_tags', 'use_editor', 'use_link', 'use_input', 'use_text_2', 'use_editor_2', 'common_text_2'], 'required'],
-            [['common_image', 'common_link', 'common_text', 'common_input', 'use_tags', 'use_editor', 'use_link', 'use_input', 'use_text_2', 'use_editor_2', 'common_text_2'], 'boolean'],
+            [['common_image', 'common_link', 'common_text', 'common_input', 'use_tags', 'use_editor', 'use_link', 'use_input', 'use_text_2', 'use_editor_2', 'common_text_2', 'use_checkbox'], 'required'],
+            [['common_image', 'common_link', 'common_text', 'common_input', 'use_tags', 'use_editor', 'use_link', 'use_input', 'use_text_2', 'use_editor_2', 'common_text_2', 'use_checkbox'], 'boolean'],
 
             ['slug', 'required'],
             [['slug'], 'unique'],
@@ -72,7 +75,7 @@ class Categories extends \yii\db\ActiveRecord
             }],
 
 //            [['link_label', 'input_label', 'text_2_label'], 'required'],
-            [['title_0', 'title_1', 'title_2', 'title_3', 'slug', 'link_label', 'input_label', 'text_2_label'], 'string', 'max' => 255],
+            [['title_0', 'title_1', 'title_2', 'title_3', 'slug', 'link_label', 'input_label', 'text_2_label', 'checkbox_label'], 'string', 'max' => 255],
 
             [['description_0', 'description_1', 'description_2', 'description_3'], 'string'],
         ];
@@ -105,6 +108,9 @@ class Categories extends \yii\db\ActiveRecord
 
             'common_image' => Yii::t('slider', 'Common image'),
 
+            'use_checkbox' => Yii::t('slider', 'Use checkbox'),
+            'checkbox_label' => Yii::t('slider', 'Checkbox label'),
+
             'common_text' => Yii::t('slider', 'Common text'),
             'use_editor' => Yii::t('slider', 'Use editor'),
 
@@ -120,7 +126,6 @@ class Categories extends \yii\db\ActiveRecord
             'use_input' => Yii::t('slider', 'Use input'),
             'common_input' => Yii::t('slider', 'Common input'),
             'input_label' => Yii::t('slider', 'Input label'),
-
         ];
     }
 

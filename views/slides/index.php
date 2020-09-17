@@ -38,8 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'format' => 'raw'
             ],
-            'title_0',
-            'active:boolean',
+            'title_0'
         ],
     ]); ?>
 </div>

@@ -29,7 +29,7 @@ $columnCount = 12 / count(Yii::$app->params['cms']['languages2']);
                         'model' => $model,
                         'attributes' => [
                             'sort',
-                            'active:boolean',
+                            'id',
                         ],
                     ]) ?>
                 </div>
@@ -51,6 +51,15 @@ $columnCount = 12 / count(Yii::$app->params['cms']['languages2']);
     </div>
 
     <div class="box">
+
+
+        <?php if ($category->use_checkbox) : ?>
+            <b class="box-header">
+                <?= $category->checkbox_label . ": " . Yii::$app->formatter->asBoolean($model->active) ?>
+            </b>
+            <br>
+        <?php endif; ?>
+
         <b class="box-header"><?= Yii::t('slider', 'Photo') ?></b>
         <div class="box-body row">
             <?php foreach (Yii::$app->params['cms']['languages2'] as $key => $language) : ?>

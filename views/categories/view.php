@@ -68,6 +68,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             'use_editor:boolean',
                         ],
                     ]) ?>
+                    <h3>Checkbox</h3>
+                    <?= DetailView::widget([
+                        'model' => $model,
+                        'attributes' => [
+                            'checkbox_label',
+                            'use_checkbox:boolean',
+                        ],
+                    ]) ?>
                 </div>
                 <div class="col-sm-3">
                     <h3>Text 2</h3>

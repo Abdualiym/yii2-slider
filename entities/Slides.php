@@ -49,7 +49,7 @@ class Slides extends \yii\db\ActiveRecord
 
     public static function getBySlug($slug, $count = false)
     {
-        $slidesQuery = Slides::find()->where(['category_id' => (Categories::findOne(['slug' => $slug]))->id]);
+        $slidesQuery = self::find()->where(['category_id' => (Categories::findOne(['slug' => $slug]))->id]);
         return $count ? $slidesQuery->count() : $slidesQuery->orderBy('sort')->all();
     }
 
@@ -98,7 +98,6 @@ class Slides extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('slider', 'ID'),
             'category_id' => Yii::t('slider', 'Category'),
-            'active' => Yii::t('slider', 'Active'),
             'sort' => Yii::t('slider', 'Sort'),
             'photo_0' => Yii::t('slider', 'Photo') . '(' . $language0 . ')',
             'photo_1' => Yii::t('slider', 'Photo') . '(' . $language1 . ')',

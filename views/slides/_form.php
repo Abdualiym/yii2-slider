@@ -141,10 +141,9 @@ $columnCount = 12 / count(Yii::$app->params['cms']['languages2']);
             </div>
             <div class="col-sm-2">
                 <br>
-                <?php
-                $model->active = $model->isNewRecord ?: $model->active;
-                echo $form->field($model, 'active')->checkbox();
-                ?>
+                <?php if ($category->use_checkbox) {
+                    echo $form->field($model, 'active')->checkbox(['label' => $category->checkbox_label]);
+                } ?>
             </div>
             <div class="col-sm-2">
                 <br>

@@ -71,7 +71,7 @@ class Slides extends \yii\db\ActiveRecord
             [['sort'], 'required'],
             [['sort'], 'integer'],
 
-            [['photo_0', 'photo_1', 'photo_2', 'photo_3'], 'image'],
+            [['photo_0', 'photo_1', 'photo_2', 'photo_3'], 'image', 'extensions' => 'png, jpg'],
 
 //            [['link_0', 'link_1', 'link_2', 'link_3'], 'url', 'defaultScheme' => 'http'],
             [['link_0', 'link_1', 'link_2', 'link_3'], 'string', 'max' => 255],
